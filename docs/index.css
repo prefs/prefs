@@ -42,7 +42,8 @@
     border-radius: 0px;
     margin-bottom: -1px;
     max-width: 100%;
-    line-height: 3;
+    line-height: 1.2;
+    padding: 16px;
     vertical-align: middle;
 }
 
