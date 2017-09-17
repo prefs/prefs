@@ -260,7 +260,7 @@ window['Slip'] = (function(){
                                 this.setState(this.states.reorder);
                             }
                         }
-                    }.bind(this), 300);
+                    }.bind(this), 250);
                 }
 
                 return {
