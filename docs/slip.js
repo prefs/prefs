@@ -158,7 +158,9 @@ window['Slip'] = (function(){
 
         this.options = options = options || {};
         this.options.keepSwipingPercent = options.keepSwipingPercent || 0;
-        this.options.minimumSwipeVelocity = options.minimumSwipeVelocity || 1;
+        // this.options.minimumSwipeVelocity = options.minimumSwipeVelocity || 1;
+        this.options.minimumSwipeVelocity = options.minimumSwipeVelocity || 0.1;
+        // this.options.minimumSwipeTime = options.minimumSwipeTime || 110;
         this.options.minimumSwipeTime = options.minimumSwipeTime || 110;
 
         // Functions used for as event handlers need usable `this` and must not change to be removable
