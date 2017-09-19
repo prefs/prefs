@@ -73,8 +73,7 @@
 
     ol.addEventListener('slip:afterswipe', function(e){
         console.log(e);
-        idx = getRandomInt(0, A.leaves.length - 1);
-        A.usedUp.push(idx);
+        var idx = getUnusedIdx(A.usedUp);
         //e.target = document.createElement("li");
         e.target.innerHTML = `${A.leaves[idx]}<span class="instant"> </span>`;
         // e.target.contenteditable = "true";
@@ -101,12 +100,41 @@
         // Get a random list of N items
         var idx;
         for (var i = 0; i < A.N; i++) {
-            idx = getRandomInt(0, A.leaves.length - 1);
-            A.usedUp.push(idx);
+            idx = getUnusedIdx(A.usedUp);
+            console.log(idx);
             document.querySelector("#slippylist").innerHTML += `<li contenteditable="true">${A.leaves[idx]}<span class="instant"> </span></li>`;
-
         }
     }
+
+    // getUnusedIdx(A.usedUp, getRandomInt(0, A.leaves.length - 1));
+    // getUnusedIdx(A.usedUp);
+
+    function getUnusedIdx(idxArray) {
+        function getIt(idxArray) {
+            var idx = getRandomInt(0, A.leaves.length - 1);
+            // If it's fresh, mark it and return it
+            console.log(idx);
+            if (idxArray.indexOf(idx) === -1) {
+                idxArray.push(idx);
+                return idx;
+            } else { // try again
+                return getIt(idxArray);
+            }
+        }
+        return getIt(idxArray);
+    }
+
+/*function factorial (n) {
+  function fact(n, acc) {
+    if (n < 2) {
+      return acc;
+    } else {
+      return fact(n-1, n * acc);
+    }
+  }
+
+  return fact(n, 1)
+}*/
 
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
