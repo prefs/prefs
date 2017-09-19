@@ -140,7 +140,7 @@ A.leaves = [
 "intuition",
 "IPAs",
 "isolation",
-"It beggars the belief sometimes // What thieves the lovers be",
+"It beggars the belief sometimes What thieves the lovers be",
 "January",
 "roasted potatoes",
 "judging",
