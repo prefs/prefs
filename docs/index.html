@@ -10,11 +10,11 @@
     body {
         background: #eee;
         font-family: Helvetica, Arial, sans-serif;
-        font-size: 24px;
+        font-size: 20px;
         font-weight: 200;
         max-width: 40em;
         margin: 0 auto;
-        padding: 5px;
+        padding: 0px;
         color: #777;
     }
 
@@ -47,7 +47,7 @@
 
 
 <script src="d3.v4.min.js"></script>
-<script src="preferences.js"></script>
+<script src="preferences.js?170919"></script>
 <script src="slip.js"></script>
 <script>
     A.usedUp = []; // indexes we've seen
@@ -73,10 +73,10 @@
 
     ol.addEventListener('slip:afterswipe', function(e){
         console.log(e);
-        idx = getRandomInt(0, A.leaves.length - 1);
-        A.usedUp.push(idx);
+        var idx = getUnusedIdx(A.usedUp);
         //e.target = document.createElement("li");
         e.target.innerHTML = `${A.leaves[idx]}<span class="instant"> </span>`;
+        // e.target.contenteditable = "true";
         // e.target.parentNode.appendChild(e.target);
         // e.target.parentNode.appendChild(e.target);
     }, false);
@@ -100,12 +100,41 @@
         // Get a random list of N items
         var idx;
         for (var i = 0; i < A.N; i++) {
-            idx = getRandomInt(0, A.leaves.length - 1);
-            A.usedUp.push(idx);
-            document.querySelector("#slippylist").innerHTML += `<li>${A.leaves[idx]}<span class="instant"> </span></li>`;
-
+            idx = getUnusedIdx(A.usedUp);
+            console.log(idx);
+            document.querySelector("#slippylist").innerHTML += `<li contenteditable="true">${A.leaves[idx]}<span class="instant"> </span></li>`;
         }
     }
+
+    // getUnusedIdx(A.usedUp, getRandomInt(0, A.leaves.length - 1));
+    // getUnusedIdx(A.usedUp);
+
+    function getUnusedIdx(idxArray) {
+        function getIt(idxArray) {
+            var idx = getRandomInt(0, A.leaves.length - 1);
+            // If it's fresh, mark it and return it
+            console.log(idx);
+            if (idxArray.indexOf(idx) === -1) {
+                idxArray.push(idx);
+                return idx;
+            } else { // try again
+                return getIt(idxArray);
+            }
+        }
+        return getIt(idxArray);
+    }
+
+/*function factorial (n) {
+  function fact(n, acc) {
+    if (n < 2) {
+      return acc;
+    } else {
+      return fact(n-1, n * acc);
+    }
+  }
+
+  return fact(n, 1)
+}*/
 
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
